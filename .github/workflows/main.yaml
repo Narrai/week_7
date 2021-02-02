@@ -1,0 +1,27 @@
+jobs:
+  pack:
+    env:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN}}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
+      - run: docker image build -t narrai/oktademo mvc
+      - run: docker push narrai/oktademo
+      - run: docker logout
+  
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: naroktademo
+          image: narrai/oktademo
+
+        
+on: 
+  push:
+    branches:
+      - main
