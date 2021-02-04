@@ -7,19 +7,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
-      - run: docker image build -t narrai/oktademo mvc
-      - run: docker push narrai/oktademo
+      - run: docker image build -t nardockerid/oktademo mvc
+      - run: docker push nardockerid/oktademo
       - run: docker logout
   
   deploy:
+    needs: pack
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: azure/webapps-deploy@v2
         with:
           app-name: naroktademo
-          image: narrai/oktademo
-
+          images: nardockerid/oktademo
         
 on: 
   push:

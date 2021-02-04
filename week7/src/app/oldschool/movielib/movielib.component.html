@@ -1,0 +1,9 @@
+<section>
+  <h2>Movie library</h2>
+  <ul>
+    <li *ngFor="let item of (movieCollection | async)">
+      <!-- <a href="library/movie" >{{ movie.name}} - {{movie.releaseYear}}</a> -->
+      <ui-movie [movie]="item"></ui-movie>
+    </li>
+  </ul>
+</section>
