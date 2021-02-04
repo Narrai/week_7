@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk as base
 WORKDIR /workspace
 COPY mvc .
 RUN dotnet build -c Release
-RUN dotnet publish --no-build -c release -o out SecurityClient/*.csproj
+RUN dotnet publish --no-build -c Release -o out SecurityClient/*.csproj
 
 FROM mcr.microsoft.com/dotnet/aspnet
 
